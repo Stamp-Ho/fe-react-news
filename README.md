@@ -1,9 +1,9 @@
 # fe-react-news
 
-- [ ] 프로젝트 인프라 및 전역 스타일
+- [x] 프로젝트 인프라 및 전역 스타일
 
   - [x] React + tailwind 개발 환경 만들기
-  - [ ] Font, color 등 공통 스타일 지정
+  - [x] Font, color 등 공통 스타일 지정
 
 - [ ] 기본 상단 영역
 

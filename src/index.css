@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* 1. 폰트 설정 (Pretendard 불러오기) */
+/* 1. 폰트 설정 (Pretendard) */
 @font-face {
   font-family: "Pretendard";
   src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
@@ -26,10 +26,7 @@
 }
 
 :root {
-  font-family: "Pretendard", system-ui, sans-serif;
-  line-height: 1.5;
-
-  /* 디자인 가이드 기반 Light Mode 변수 */
+  --color-blue-500: ;
   --color-grayscale-white: #ffffff;
   --color-grayscale-white-alt: rgba(255, 255, 255, 0.7);
   --color-grayscale-50: #f5f7f9;
@@ -42,20 +39,60 @@
 
   --color-blue-100: #7890e7;
   --color-blue-500: #4362d0;
+}
+/* 2. Tailwind v4 테마 설정 */
+@theme {
+  /* 기본 폰트 교체 */
+  --font-sans: "Pretendard", ui-sans-serif, system-ui;
 
-  /* Semantic Tokens (Light) */
+  /* 컬러 팔레트 정의 (grayscale, blue) */
+
+  /* 디자인 토큰 (시맨틱 컬러) - 아래 :root 변수와 연결 */
+  --color-text-strong: var(--text-strong);
+  --color-text-bold: var(--text-bold);
+  --color-text-default: var(--text-default);
+  --color-text-weak: var(--text-weak);
+  --color-text-point: #4362d0;
+  --color-text-white-weak: var(--text-white-weak);
+
+  --color-surface-default: var(--surface-default);
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-brand-default: #4362d0;
+  --color-surface-brand-alt: #7890e7;
+
+  --color-border-default: var(--border-default);
+  --color-border-bold: var(--border-bold);
+
+  /* Radius & Shadow */
+  --radius-100: 8px;
+  --shadow-popup: 0 4px 2px rgba(20, 33, 43, 0.02),
+    0 2px 18px rgba(20, 33, 43, 0.08);
+
+  /* Font Sizes */
+  --font-size-display-bold24: 24px;
+  --font-size-display-bold16: 16px;
+  --font-size-display-bold14: 14px;
+  --font-size-display-bold12: 12px;
+  --font-size-display-medium16: 16px;
+  --font-size-display-medium14: 14px;
+  --font-size-display-medium12: 12px;
+}
+
+/* 3. 시맨틱 변수 정의 (Light / Dark) */
+:root {
   --text-strong: var(--color-grayscale-black);
   --text-bold: var(--color-grayscale-500);
   --text-default: var(--color-grayscale-400);
   --text-weak: var(--color-grayscale-200);
+  --text-white-weak: var(--color-grayscale-white-alt);
   --surface-default: var(--color-grayscale-white);
   --surface-alt: var(--color-grayscale-50);
   --border-default: var(--color-grayscale-100);
   --border-bold: var(--color-grayscale-300);
 }
 
-/* Dark Mode 설정 (시스템 설정 혹은 .dark 클래스) */
-@media (prefers-color-scheme: dark) {
+/* v4 다크모드 대응 방식 */
+/* @variant dark (&:where(.dark, .dark *)) {
   :root {
     --text-strong: var(--color-grayscale-white);
     --text-bold: var(--color-grayscale-50);
@@ -66,21 +103,22 @@
     --border-default: var(--color-grayscale-400);
     --border-bold: var(--color-grayscale-white-alt);
   }
+} */
+
+/* 4. 기본 베이스 스타일 및 유틸리티 클래스 */
+@layer base {
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: white;
+    color: var(--text-default);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-/* 기본 스타일 초기화 */
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: var(--surface-alt);
-  color: var(--text-default);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Typography Utility Classes */
 @layer components {
-  /* Bold Series */
+  /* 복합 Typography 클래스 정의 */
   .display-bold24 {
     font-size: 24px;
     font-weight: 700;
@@ -101,8 +139,6 @@ body {
     font-weight: 700;
     line-height: normal;
   }
-
-  /* Medium Series */
   .display-medium16 {
     font-size: 16px;
     font-weight: 500;
@@ -119,19 +155,22 @@ body {
     line-height: normal;
   }
 
+  .available-medium14 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    @apply cursor-pointer hover:underline;
+  }
   /* Interaction Styles */
   .available-medium16 {
-    @apply display-medium16 cursor-pointer hover:underline text-blue-500;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    @apply cursor-pointer hover:underline;
   }
 
   /* Layout */
   .screen-width {
     @apply mx-auto w-full max-w-[1140px] px-4;
   }
-}
-
-/* Shadow System */
-.shadow-popup {
-  box-shadow: 0 4px 2px rgba(20, 33, 43, 0.02),
-    0 2px 18px rgba(20, 33, 43, 0.08);
 }
