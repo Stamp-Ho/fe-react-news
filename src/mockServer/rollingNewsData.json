@@ -1,201 +1,201 @@
 [
   {
-    "press": "연합뉴스",
+    "pressName": "연합뉴스",
     "newsTitle": "[속보] 도심 공원 ‘조용한 독서존’ 시범 운영… 시민 호응 이어져",
     "link": "https://www.yna.co.kr/view/news01"
   },
   {
-    "press": "서울경제",
+    "pressName": "서울경제",
     "newsTitle": "착한 소비 캠페인, 지역 상권 회복에 긍정적 영향",
     "link": "https://www.sedaily.com/news02"
   },
   {
-    "press": "조선일보",
+    "pressName": "조선일보",
     "newsTitle": "청년 주거 지원 확대… 공공임대 공급 속도 낸다",
     "link": "https://www.chosun.com/news03"
   },
   {
-    "press": "중앙일보",
+    "pressName": "중앙일보",
     "newsTitle": "출퇴근 시간 단축 실험, 직장인 만족도 높아",
     "link": "https://www.joongang.co.kr/news04"
   },
   {
-    "press": "한겨레",
+    "pressName": "한겨레",
     "newsTitle": "생활 폐기물 감축 정책, 참여 시민 늘며 성과",
     "link": "https://www.hani.co.kr/news05"
   },
   {
-    "press": "동아일보",
+    "pressName": "동아일보",
     "newsTitle": "초등 돌봄교실 운영 시간 연장… 맞벌이 가정 부담 완화",
     "link": "https://www.donga.com/news06"
   },
   {
-    "press": "국민일보",
+    "pressName": "국민일보",
     "newsTitle": "지역 축제 재개에 관광객 발길 회복 조짐",
     "link": "https://www.kmib.co.kr/news07"
   },
   {
-    "press": "한국일보",
+    "pressName": "한국일보",
     "newsTitle": "공공 자전거 이용 증가… 친환경 교통수단 자리잡나",
     "link": "https://www.hankookilbo.com/news08"
   },
   {
-    "press": "머니투데이",
+    "pressName": "머니투데이",
     "newsTitle": "소상공인 디지털 전환 지원, 매출 개선 효과",
     "link": "https://www.mt.co.kr/news09"
   },
   {
-    "press": "매일경제",
+    "pressName": "매일경제",
     "newsTitle": "AI 기반 민원 처리 도입… 행정 효율성 높아져",
     "link": "https://www.mk.co.kr/news10"
   },
   {
-    "press": "경향신문",
+    "pressName": "경향신문",
     "newsTitle": "동네 공부방의 변신, 노인 디지털 교육 거점으로",
     "link": "https://www.khan.co.kr/news11"
   },
   {
-    "press": "한국경제",
+    "pressName": "한국경제",
     "newsTitle": "로봇 배송 서비스, 아파트 단지 내 상용화 박차",
     "link": "https://www.hankyung.com/news12"
   },
   {
-    "press": "문화일보",
+    "pressName": "문화일보",
     "newsTitle": "야간 도심 도보 투어 인기… '밤의 문화' 재발견",
     "link": "https://www.munhwa.com/news13"
   },
   {
-    "press": "세계일보",
+    "pressName": "세계일보",
     "newsTitle": "다문화 가정 자녀 학습 지원 프로그램 만족도 90%",
     "link": "https://www.segye.com/news14"
   },
   {
-    "press": "YTN",
+    "pressName": "YTN",
     "newsTitle": "[현장] 자율주행 셔틀버스, 시민들의 새로운 발",
     "link": "https://www.ytn.co.kr/news15"
   },
   {
-    "press": "KBS",
+    "pressName": "KBS",
     "newsTitle": "전통시장 '제로 웨이스트' 바람… 장바구니 사용 급증",
     "link": "https://news.kbs.co.kr/news16"
   },
   {
-    "press": "MBC",
+    "pressName": "MBC",
     "newsTitle": "청년 스타트업 '고령층 일자리' 창출의 주역으로",
     "link": "https://imnews.imbc.com/news17"
   },
   {
-    "press": "SBS",
+    "pressName": "SBS",
     "newsTitle": "우리 동네 공유 주차장, 주차난 해소의 열쇠",
     "link": "https://news.sbs.co.kr/news18"
   },
   {
-    "press": "디지털타임스",
+    "pressName": "디지털타임스",
     "newsTitle": "스마트 가로등 도입 후 심야 범죄 발생률 감소",
     "link": "https://www.dt.co.kr/news19"
   },
   {
-    "press": "전자신문",
+    "pressName": "전자신문",
     "newsTitle": "메타버스 기반 직업 체험, 청소년 진로 탐색 도와",
     "link": "https://www.etnews.com/news20"
   },
   {
-    "press": "파이낸셜뉴스",
+    "pressName": "파이낸셜뉴스",
     "newsTitle": "반려견 동반 공원 에티켓 캠페인 '펫티켓' 정착 중",
     "link": "https://www.fnnews.com/news21"
   },
   {
-    "press": "아시아경제",
+    "pressName": "아시아경제",
     "newsTitle": "1인 가구 소셜 다이닝, 외로움 달래는 소통 창구",
     "link": "https://www.asiae.co.kr/news22"
   },
   {
-    "press": "이데일리",
+    "pressName": "이데일리",
     "newsTitle": "중고거래 플랫폼 내 '나눔' 문화 확산… 온정 이어져",
     "link": "https://www.edaily.co.kr/news23"
   },
   {
-    "press": "헤럴드경제",
+    "pressName": "헤럴드경제",
     "newsTitle": "도시 정원 가꾸기 사업, 미세먼지 저감 효과 톡톡",
     "link": "https://www.heraldcorp.com/news24"
   },
   {
-    "press": "노컷뉴스",
+    "pressName": "노컷뉴스",
     "newsTitle": "\"휠체어도 편하게\"… 배리어 프리 관광지 확대",
     "link": "https://www.nocutnews.co.kr/news25"
   },
   {
-    "press": "뉴스1",
+    "pressName": "뉴스1",
     "newsTitle": "길거리 흡연 구역 정비, 비흡연자 권리 보호 강화",
     "link": "https://www.news1.kr/news26"
   },
   {
-    "press": "뉴시스",
+    "pressName": "뉴시스",
     "newsTitle": "공공 와이파이 성능 개선, 통신비 절감 효과 기대",
     "link": "https://www.newsis.com/news27"
   },
   {
-    "press": "데일리안",
+    "pressName": "데일리안",
     "newsTitle": "\"우리 아이 첫 적금\"… 영유아 우대 금리 상품 인기",
     "link": "https://www.dailian.co.kr/news28"
   },
   {
-    "press": "아이뉴스24",
+    "pressName": "아이뉴스24",
     "newsTitle": "가상현실(VR) 치매 예방 교육, 어르신들께 인기",
     "link": "https://www.inews24.com/news29"
   },
   {
-    "press": "조세일보",
+    "pressName": "조세일보",
     "newsTitle": "성실 납세자 혜택 강화… 공공시설 이용료 감면",
     "link": "https://www.joseilbo.com/news30"
   },
   {
-    "press": "한국농어민신문",
+    "pressName": "한국농어민신문",
     "newsTitle": "로컬 푸드 직매장 확대, 농가 소득 증대 견인",
     "link": "https://www.agrinet.co.kr/news31"
   },
   {
-    "press": "여성신문",
+    "pressName": "여성신문",
     "newsTitle": "경력단절 여성 재취업 지원, IT 보안 전문가 양성",
     "link": "https://www.womennews.co.kr/news32"
   },
   {
-    "press": "시사저널",
+    "pressName": "시사저널",
     "newsTitle": "동네 의원 '비대면 상담' 시범 사업, 의료 접근성 향상",
     "link": "https://www.sisajournal.com/news33"
   },
   {
-    "press": "오마이뉴스",
+    "pressName": "오마이뉴스",
     "newsTitle": "우리 동네 예술가들, 낙후된 골목길을 벽화 거리로",
     "link": "https://www.ohmynews.com/news34"
   },
   {
-    "press": "프레시안",
+    "pressName": "프레시안",
     "newsTitle": "에너지 취약계층 난방비 지원 사업, 대상자 확대",
-    "link": "https://www.pressian.com/news35"
+    "link": "https://www.pressNameian.com/news35"
   },
   {
-    "press": "국민일보",
+    "pressName": "국민일보",
     "newsTitle": "\"작은 결혼식\" 확산… 허례허식 대신 의미 찾기",
     "link": "https://www.kmib.co.kr/news36"
   },
   {
-    "press": "매일경제",
+    "pressName": "매일경제",
     "newsTitle": "퇴직 후 '인생 2막' 지원, 시니어 창업 센터 북적",
     "link": "https://www.mk.co.kr/news37"
   },
   {
-    "press": "동아일보",
+    "pressName": "동아일보",
     "newsTitle": "어린이 통학로 '옐로 카펫' 설치 후 사고율 급감",
     "link": "https://www.donga.com/news38"
   },
   {
-    "press": "한겨레",
+    "pressName": "한겨레",
     "newsTitle": "공공기관 '종이 없는 사무실' 도입… 탄소 중립 앞장",
     "link": "https://www.hani.co.kr/news39"
   },
   {
-    "press": "연합뉴스",
+    "pressName": "연합뉴스",
     "newsTitle": "[기획] '워케이션' 명소로 떠오르는 지방 소도시들",
     "link": "https://www.yna.co.kr/view/news40"
   }

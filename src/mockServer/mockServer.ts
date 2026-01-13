@@ -5,8 +5,9 @@ import pressDashboardData from "./pressDashboardData.json";
 export const fetchRollingNews = async () => {
   try {
     const newsList = rollingNewsData;
-
-    const result = createShuffleQueue(newsList);
+    // console.log(newsList);
+    // const result = createShuffleQueue(newsList);
+    // console.log(result);
 
     return newsList;
   } catch (error) {
