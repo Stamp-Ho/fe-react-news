@@ -8,19 +8,8 @@ type rollingBarParams = {
 export const RollingBar = ({ newsList, isActive }: rollingBarParams) => {
   const [newsIdx, setNewsIdx] = useState(0);
 
-  let isMouseOn = false;
+  let isMouseOn = useRef(false);
   const listRef = useRef<HTMLUListElement | null>(null);
-  const animRef = useRef<number | null>(null);
-  const yRef = useRef(0);
-
-  const rollNewsOnlyCss = (el: HTMLUListElement) => {
-    el.style.transition = "transform 0.5s ease-in-out";
-    el.style.transform = `translateY(-50%)`;
-    setTimeout(() => {
-      initTransition(el);
-      alterNews(el);
-    }, 500);
-  };
 
   const initTransition = (el: HTMLUListElement) => {
     el.style.transition = "none";
@@ -34,16 +23,22 @@ export const RollingBar = ({ newsList, isActive }: rollingBarParams) => {
 
   useEffect(() => {
     const el = listRef.current;
-    if (!el || !isActive || isMouseOn) return;
+    if (!el || !isActive || isMouseOn.current) return;
 
-    rollNewsOnlyCss(el);
+    el.style.transition = "transform 0.5s ease-in-out";
+    el.style.transform = `translateY(-50%)`;
+    const timer = setTimeout(() => {
+      initTransition(el);
+      alterNews(el);
+    }, 500);
+    return () => clearTimeout(timer);
   }, [isActive]);
   if (!newsList || newsList.length === 0) return <article className="flex-1" />;
   return (
     <article
       className="flex h-12.25 flex-row items-center flex-1 border border-border-default bg-surface-alt overflow-x-hidden"
-      onMouseEnter={() => (isMouseOn = true)}
-      onMouseLeave={() => (isMouseOn = false)}
+      onMouseEnter={() => (isMouseOn.current = true)}
+      onMouseLeave={() => (isMouseOn.current = false)}
     >
       <div className="px-4 h-6 overflow-hidden flex-1 min-w-0">
         <ul className="min-w-0" ref={listRef}>
