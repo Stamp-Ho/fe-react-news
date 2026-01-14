@@ -1,4 +1,5 @@
-import { ListViewIcon, GridViewIcon } from "../../assets/Icons";
+import { ListViewIcon, GridViewIcon } from "../common/Icons";
+import { useContext } from "react";
 
 type mainHeaderParams = {
   viewOnlySubs: boolean;
@@ -22,9 +23,11 @@ const MainHeader = ({
   const selectedViewType = (bool: boolean) => {
     return bool ? "text-blue-500" : "text-text-weak";
   };
-  const badgeStyle = viewOnlySubs
-    ? " bg-blue-500 text-text-white-default"
-    : "bg-blue-100 text-text-white-weak";
+  const badgeStyle = (bool: boolean) => {
+    return bool
+      ? " bg-blue-500 text-text-white-default"
+      : "bg-blue-100 text-text-white-weak";
+  };
   return (
     <header className="flex flex-row justify-between items-center">
       <div className="flex flex-row gap-6">
@@ -35,14 +38,17 @@ const MainHeader = ({
           전체언론사
         </a>
         <a
-          className={`gap-1 flex flex-row items-center ${selectedTab(
-            viewOnlySubs
-          )}`}
+          className={`gap-1 flex flex-row items-center`}
           onClick={() => setViewOnlySubs(true)}
         >
-          내가 구독한 언론사
+          <span className={`${selectedTab(viewOnlySubs)}`}>
+            내가 구독한 언론사
+          </span>
+
           <div
-            className={`h-5  w-5 rounded-lg display-medium12 flex items-center justify-center ${badgeStyle}`}
+            className={`h-5  w-5 rounded-lg display-medium12 flex items-center justify-center display-medium12 ${badgeStyle(
+              viewOnlySubs
+            )}`}
           >
             {subscribedNum}
           </div>

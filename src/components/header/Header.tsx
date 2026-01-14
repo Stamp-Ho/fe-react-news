@@ -1,4 +1,4 @@
-import { Logo } from "../../assets/Icons";
+import { Logo } from "../common/Icons";
 import { formattedDate } from "../../utils/uitls";
 
 const Header = () => {
