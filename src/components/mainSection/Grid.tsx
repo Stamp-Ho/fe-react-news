@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getPressLogos } from "../../libs/apis/apis";
+import { SubscribeBtn } from "../common/SubscribeButton";
+import PressLogoTile from "./PressLogoTile";
+import { MainSectionContext } from "./mainSectionContext";
 
 type pressLogoType = {
   id: number;
@@ -14,11 +17,23 @@ type gridProps = {
 };
 
 const Grid = ({ currentPage, pressLogos }: gridProps) => {
+  const context = useContext(MainSectionContext);
+  if (!context) return <div>loading...</div>;
+
+  const { subscribedPressList, viewOnlySubs } = context;
+
   const [slicedList, setSlicedList] = useState<pressLogoType>([]);
 
   useEffect(() => {
     if (pressLogos && pressLogos.length > 0) {
-      const sliced = pressLogos.slice(currentPage * 24, (currentPage + 1) * 24);
+      let sliced: any[] = [];
+      if (viewOnlySubs) {
+        sliced = pressLogos.filter((press) =>
+          subscribedPressList.has(press.id)
+        );
+      } else {
+        sliced = pressLogos.slice(currentPage * 24, (currentPage + 1) * 24);
+      }
       const tempList = [
         ...sliced,
         ...Array(24 - sliced.length).fill({
@@ -28,21 +43,15 @@ const Grid = ({ currentPage, pressLogos }: gridProps) => {
           logo: null,
         }),
       ];
-      console.log(tempList);
 
       setSlicedList(tempList);
     }
-  }, [currentPage, pressLogos]);
+  }, [currentPage, pressLogos, viewOnlySubs, subscribedPressList]);
 
   return (
-    <div className="grid grid-cols-6 grid-rows-4 min-w-140 w-full min-h-40">
+    <div className="grid grid-cols-6 grid-rows-4 min-w-140 w-full min-h-97">
       {slicedList.map((logo, idx) => (
-        <button
-          key={logo.id !== null ? "pressTile" + logo.id : "placeholder" + idx}
-          className="flex items-center justify-center border border-border-default cursor-pointer -ml-px -mt-px"
-        >
-          <img src={logo.logo} id={logo.press} />
-        </button>
+        <PressLogoTile logo={logo} index={idx} />
       ))}
     </div>
   );
