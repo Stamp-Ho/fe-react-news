@@ -8,7 +8,6 @@
   font-weight: 400;
   font-style: normal;
 }
-
 @font-face {
   font-family: "Pretendard";
   src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
@@ -16,7 +15,6 @@
   font-weight: 500;
   font-style: normal;
 }
-
 @font-face {
   font-family: "Pretendard";
   src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
@@ -26,9 +24,8 @@
 }
 
 :root {
-  --color-blue-500: ;
-  --color-grayscale-white: #ffffff;
-  --color-grayscale-white-alt: rgba(255, 255, 255, 0.7);
+  /* Base Colors */
+  --color-white-alt: rgba(255, 255, 255, 0.7);
   --color-grayscale-50: #f5f7f9;
   --color-grayscale-100: #d2dae0;
   --color-grayscale-200: #879298;
@@ -36,76 +33,110 @@
   --color-grayscale-400: #5f6e76;
   --color-grayscale-500: #4b5966;
   --color-grayscale-black: #14212b;
-
   --color-blue-100: #7890e7;
   --color-blue-500: #4362d0;
-}
-/* 2. Tailwind v4 테마 설정 */
-@theme {
-  /* 기본 폰트 교체 */
-  --font-sans: "Pretendard", ui-sans-serif, system-ui;
 
-  /* 컬러 팔레트 정의 (grayscale, blue) */
+  /* Typography */
+  --font-pretendard: "Pretendard", sans-serif;
+  --text-display-bold24: 700 24px / auto var(--font-pretendard);
+  --text-display-bold16: 700 16px / auto var(--font-pretendard);
+  --text-display-bold14: 700 14px / auto var(--font-pretendard);
+  --text-display-bold12: 700 12px / auto var(--font-pretendard);
+  --text-display-medium16: 500 16px/22px var(--font-pretendard);
+  --text-display-medium14: 500 14px / auto var(--font-pretendard);
+  --text-display-medium12: 500 12px / auto var(--font-pretendard);
 
-  /* 디자인 토큰 (시맨틱 컬러) - 아래 :root 변수와 연결 */
-  --color-text-strong: var(--text-strong);
-  --color-text-bold: var(--text-bold);
-  --color-text-default: var(--text-default);
-  --color-text-weak: var(--text-weak);
-  --color-text-point: #4362d0;
-  --color-text-white-weak: var(--text-white-weak);
-
-  --color-surface-default: var(--surface-default);
-  --color-surface-alt: var(--surface-alt);
-  --color-surface-brand-default: #4362d0;
-  --color-surface-brand-alt: #7890e7;
-
-  --color-border-default: var(--border-default);
-  --color-border-bold: var(--border-bold);
-
-  /* Radius & Shadow */
-  --radius-100: 8px;
+  /* Shadow */
   --shadow-popup: 0 4px 2px rgba(20, 33, 43, 0.02),
     0 2px 18px rgba(20, 33, 43, 0.08);
 
-  /* Font Sizes */
-  --font-size-display-bold24: 24px;
-  --font-size-display-bold16: 16px;
-  --font-size-display-bold14: 14px;
-  --font-size-display-bold12: 12px;
-  --font-size-display-medium16: 16px;
-  --font-size-display-medium14: 14px;
-  --font-size-display-medium12: 12px;
+  /* Semantic Tokens (Light Mode - 초기값) */
+  --color-text-strong: var(--color-grayscale-black);
+  --color-text-bold: var(--color-grayscale-500);
+  --color-text-default: var(--color-grayscale-400);
+  --color-text-weak: var(--color-grayscale-200);
+  --color-text-white-default: white;
+  --color-text-white-weak: var(--color-white-alt);
+  --color-text-point: var(--color-blue-500);
+  --color-surface-default: white;
+  --color-surface-alt: var(--color-grayscale-50);
+  --color-surface-brand-default: var(--color-blue-500);
+  --color-surface-brand-alt: var(--color-blue-100);
+  --color-border-bold: var(--color-grayscale-300);
+  --color-border-default: var(--color-grayscale-100);
+}
+@theme {
+  /* Base Colors */
+  --color-white-alt: rgba(255, 255, 255, 0.7);
+  --color-grayscale-50: #f5f7f9;
+  --color-grayscale-100: #d2dae0;
+  --color-grayscale-200: #879298;
+  --color-grayscale-300: #6e8091;
+  --color-grayscale-400: #5f6e76;
+  --color-grayscale-500: #4b5966;
+  --color-grayscale-black: #14212b;
+  --color-blue-100: #7890e7;
+  --color-blue-500: #4362d0;
+
+  /* Typography */
+  --font-pretendard: "Pretendard", sans-serif;
+  --text-display-bold24: 700 24px / auto var(--font-pretendard);
+  --text-display-bold16: 700 16px / auto var(--font-pretendard);
+  --text-display-bold14: 700 14px / auto var(--font-pretendard);
+  --text-display-bold12: 700 12px / auto var(--font-pretendard);
+  --text-display-medium16: 500 16px/22px var(--font-pretendard);
+  --text-display-medium14: 500 14px / auto var(--font-pretendard);
+  --text-display-medium12: 500 12px / auto var(--font-pretendard);
+
+  /* Shadow */
+  --shadow-popup: 0 4px 2px rgba(20, 33, 43, 0.02),
+    0 2px 18px rgba(20, 33, 43, 0.08);
+
+  /* Semantic Tokens (Light Mode - 초기값) */
+  --color-text-strong: var(--color-grayscale-black);
+  --color-text-bold: var(--color-grayscale-500);
+  --color-text-default: var(--color-grayscale-400);
+  --color-text-weak: var(--color-grayscale-200);
+  --color-text-white-default: white;
+  --color-text-white-weak: var(--color-white-alt);
+  --color-text-point: var(--color-blue-500);
+  --color-surface-default: white;
+  --color-surface-alt: var(--color-grayscale-50);
+  --color-surface-brand-default: var(--color-blue-500);
+  --color-surface-brand-alt: var(--color-blue-100);
+  --color-border-bold: var(--color-grayscale-300);
+  --color-border-default: var(--color-grayscale-100);
 }
 
-/* 3. 시맨틱 변수 정의 (Light / Dark) */
-:root {
-  --text-strong: var(--color-grayscale-black);
-  --text-bold: var(--color-grayscale-500);
-  --text-default: var(--color-grayscale-400);
-  --text-weak: var(--color-grayscale-200);
-  --text-white-weak: var(--color-grayscale-white-alt);
-  --surface-default: var(--color-grayscale-white);
-  --surface-alt: var(--color-grayscale-50);
-  --border-default: var(--color-grayscale-100);
-  --border-bold: var(--color-grayscale-300);
-}
-
-/* v4 다크모드 대응 방식 */
-/* @variant dark (&:where(.dark, .dark *)) {
+/* --- 2. Dark Mode 처리 (Theme 블록 밖에서 정의) --- */
+@layer base {
   :root {
-    --text-strong: var(--color-grayscale-white);
-    --text-bold: var(--color-grayscale-50);
-    --text-default: var(--color-grayscale-100);
-    --text-weak: var(--color-grayscale-white-alt);
-    --surface-default: var(--color-grayscale-black);
-    --surface-alt: var(--color-grayscale-500);
-    --border-default: var(--color-grayscale-400);
-    --border-bold: var(--color-grayscale-white-alt);
+    /* 시스템 설정이 다크 모드일 때 */
+    @media (prefers-color-scheme: dark) {
+      --color-text-strong: white;
+      --color-text-bold: var(--color-grayscale-50);
+      --color-text-default: var(--color-grayscale-100);
+      --color-text-weak: var(--color-white-alt);
+      --color-border-bold: var(--color-white-alt);
+      --color-border-default: var(--color-grayscale-400);
+      --color-surface-default: var(--color-grayscale-black);
+      --color-surface-alt: var(--color-grayscale-500);
+    }
   }
-} */
 
-/* 4. 기본 베이스 스타일 및 유틸리티 클래스 */
+  /* HTML 태그에 .dark 클래스가 명시적으로 붙었을 때 (토글 기능용) */
+  .dark {
+    --color-text-strong: white;
+    --color-text-bold: var(--color-grayscale-50);
+    --color-text-default: var(--color-grayscale-100);
+    --color-text-weak: var(--color-white-alt);
+    --color-border-bold: var(--color-white-alt);
+    --color-border-default: var(--color-grayscale-400);
+    --color-surface-default: var(--color-grayscale-black);
+    --color-surface-alt: var(--color-grayscale-500);
+  }
+}
+
 @layer base {
   body {
     margin: 0;
@@ -116,7 +147,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
-
 @layer components {
   /* 복합 Typography 클래스 정의 */
   .display-bold24 {
@@ -167,6 +197,11 @@
     font-weight: 500;
     line-height: 22px;
     @apply cursor-pointer hover:underline;
+  }
+  .selected-bold16 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
   }
 
   /* Layout */
