@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getRollingNews } from "../../libs/apis/apis";
-import { RollingBar, RollingBarHandle } from "./rollingBar";
+import { RollingBar } from "./rollingBar";
 
 type RollingSectionProps = {
   barCount: number;
@@ -16,8 +16,7 @@ export default function RollingSection({
   rollGap = 1,
 }: RollingSectionProps) {
   const [newsData, setNewsData] = useState<any>([]);
-
-  const barRefs = useRef<(RollingBarHandle | null)[]>([]);
+  const [targetToRoll, setTargetToRoll] = useState<number | null>(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -27,25 +26,31 @@ export default function RollingSection({
     getData();
   }, []);
 
-  const timerRef = useRef<number | null>(null);
-
   const rollNext = (index: number) => {
-    // 인덱스 순환 처리
-    if (index >= barRefs.current.length) {
-      let extraDelay = totalDelay - rollGap * barCount;
-      extraDelay = extraDelay < 0 ? 0 : extraDelay;
-      setTimeout(() => rollNext(0), extraDelay * 1000);
-    } else
-      timerRef.current = window.setTimeout(() => {
-        barRefs.current[index]?.roll();
-        rollNext(index + 1);
-      }, rollGap * 1000);
+    setTargetToRoll(index); // index에 해당하는 영역 animation 시작
+    timerRef.current = window.setTimeout(() => {
+      // 인덱스 순환 처리
+      if (index === barCount) restartRoll();
+      else rollNext(index + 1);
+    }, rollGap * 1000);
   };
 
+  let extraDelay = totalDelay - rollGap * (barCount + 1);
+  extraDelay = extraDelay < 0 ? 0 : extraDelay;
+  //전체 시간(5초) - 영역 개수만큼(2 * 1s) = 3초 기다린 후, 돌리기
+  const restartRoll = () => {
+    setTargetToRoll(null);
+    setTimeout(() => rollNext(0), extraDelay * 1000);
+  };
+
+  const timerRef = useRef<number | null>(null);
   useEffect(() => {
     // newsData가 채워졌을 때만 시작
     if (newsData.length > 0) {
-      rollNext(0);
+      //일단 5초 기다리고 롤링 시작
+      timerRef.current = window.setTimeout(() => {
+        rollNext(0);
+      }, totalDelay * 1000);
     }
 
     return () => {
@@ -65,9 +70,7 @@ export default function RollingSection({
             idx * newsCountPerBar,
             (idx + 1) * newsCountPerBar
           )}
-          ref={(el) => {
-            barRefs.current[idx] = el;
-          }}
+          isActive={targetToRoll === idx}
         />
       ))}
     </section>
