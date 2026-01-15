@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getRollingNews } from "../../libs/apis/apis";
 import { RollingBar } from "./rollingBar";
+import { useQuery } from "../../libs/hooks/useQuery";
 
 type RollingSectionProps = {
   barCount: number;
@@ -15,16 +16,11 @@ export default function RollingSection({
   totalDelay = 5,
   rollGap = 1,
 }: RollingSectionProps) {
-  const [newsData, setNewsData] = useState<any>([]);
+  const { data: newsData, isLoading } = useQuery<any>(
+    "rollingNews",
+    1000 * 60 * 30
+  );
   const [targetToRoll, setTargetToRoll] = useState<number | null>(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getRollingNews();
-      setNewsData(data.data);
-    };
-    getData();
-  }, []);
 
   const rollNext = (index: number) => {
     setTargetToRoll(index); // index에 해당하는 영역 animation 시작
@@ -46,7 +42,7 @@ export default function RollingSection({
   const timerRef = useRef<number | null>(null);
   useEffect(() => {
     // newsData가 채워졌을 때만 시작
-    if (newsData.length > 0) {
+    if (newsData?.length > 0) {
       //일단 5초 기다리고 롤링 시작
       timerRef.current = window.setTimeout(() => {
         rollNext(0);
@@ -61,6 +57,8 @@ export default function RollingSection({
       }
     };
   }, [newsData]);
+
+  if (isLoading) return <div>loading...</div>;
   return (
     <section className="flex flex-row gap-1 min-w-140">
       {Array.from({ length: barCount }).map((_, idx) => (
