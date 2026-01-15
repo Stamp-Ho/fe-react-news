@@ -21,8 +21,7 @@ const AlertModal = () => {
         left-1/2 top-1/2 -translate-1/2
          flex flex-col items-center justify-center
          border border-border-default
-         shadow-shadow-popup;
-"
+         shadow-popup"
     >
       <div className="h-23 flex flex-col items-center justify-center">
         <div
