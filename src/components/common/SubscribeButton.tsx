@@ -1,38 +1,56 @@
-import { useContext } from "react";
-import { MainSectionContext } from "../mainSection/mainSectionContext";
+import { apiClient } from "../../core/apiClient";
+import myStore from "../../core/cacheStore";
+import { useQuery } from "../../libs/hooks/useQuery";
+import { useStore } from "../../libs/hooks/useStore";
+import { unsubscribeTarget } from "../../type/types";
 import { CloseIcon, PlusIcon } from "./Icons";
 
 type subscribeBtnParams = {
   id: number;
+  name: string;
+  onWhiteBg?: boolean;
 };
 
-export function SubscribeBtn({ id }: subscribeBtnParams) {
-  const context = useContext(MainSectionContext);
-  if (!context) return null;
-  const { subscribedPressList, setSubscribedPressList } = context;
+export function SubscribeBtn({
+  id,
+  name,
+  onWhiteBg = false,
+}: subscribeBtnParams) {
+  const { data: subscribedPressList, isLoading: loadingSubscribedPressList } =
+    useQuery<number[]>("subscribedPressList");
+  const [unsubscribeTarget, setUnsubscribeTarget] =
+    useStore<unsubscribeTarget>("unsubscribeTarget");
 
-  const onSubscribeClicked = () => {
-    if (!subscribedPressList || !setSubscribedPressList) return;
-
-    setSubscribedPressList((prevSet) => {
-      // 1. 기존 Set을 복사하여 새로운 Set 생성 (불변성 유지)
-      const newSet = new Set(prevSet);
-
-      // 2. 존재 여부에 따라 추가 또는 삭제 (Toggle)
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-
-      // 3. 새로운 참조를 반환하여 리렌더링 트리거
-      return newSet;
-    });
+  const onSubscribeClicked = async () => {
+    if (isSubscribed) {
+      setUnsubscribeTarget({ id: id, name: name, isSubscribed: isSubscribed });
+    } else {
+      const result = await apiClient(`toggleSubscribe/id=${id}`);
+      myStore.set("subscribedPressList", result);
+    }
   };
+
+  const isSubscribed = subscribedPressList?.includes(id);
+  const bgColorByParentBg =
+    (!onWhiteBg && isSubscribed) || (onWhiteBg && !isSubscribed)
+      ? "bg-surface-alt"
+      : "bg-surface-default";
+
   return (
-    <button className="cursor-pointer" onClick={onSubscribeClicked}>
-      <div>{subscribedPressList.has(id) ? <CloseIcon /> : <PlusIcon />}</div>
-      <div>{subscribedPressList.has(id) ? "구독해제" : "구독하기"}</div>
+    <button
+      className={`cursor-pointer border border-border-default h-6 flex-row flex items-center rounded-full
+        available-medium12 text-text-weak hover:text-text-bold gap-0.5 px-1.5
+        hover:border-border-bold  ${bgColorByParentBg}`}
+      onClick={onSubscribeClicked}
+    >
+      <div>
+        {isSubscribed ? (
+          <CloseIcon className="w-4 h-4" />
+        ) : (
+          <PlusIcon className="w-4 h-4" />
+        )}
+      </div>
+      <div className="pr-1 ">{isSubscribed ? "구독해제" : "구독하기"}</div>
     </button>
   );
 }

@@ -1,4 +1,3 @@
-import { createShuffleQueue } from "../utils/uitls";
 import rollingNewsData from "./rollingNewsData.json";
 import pressLogoData from "./pressLogoData.json";
 import pressDashboardData from "./pressDashboardData.json";

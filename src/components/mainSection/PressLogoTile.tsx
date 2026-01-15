@@ -4,11 +4,15 @@ import { SubscribeBtn } from "../common/SubscribeButton";
 const PressLogoTile = ({ logo, index }: any) => {
   const [isHidden, setIsHidden] = useState(true);
 
+  const handleMouseEnter = () => {
+    if (logo.id === null) return;
+    setIsHidden(false);
+  };
+
   return (
-    <button
-      key={logo.id !== null ? "pressTile" + logo.id : "placeholder" + index}
+    <div
       className="relative flex items-center justify-center border border-border-default -ml-px -mt-px"
-      onMouseEnter={() => setIsHidden(false)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setIsHidden(true)}
     >
       <img className="h-5" src={logo.logo} id={logo.press} />
@@ -17,9 +21,9 @@ const PressLogoTile = ({ logo, index }: any) => {
           isHidden && "hidden"
         }`}
       >
-        <SubscribeBtn id={logo.id} />
+        <SubscribeBtn id={logo.id} name={logo.press} onWhiteBg={false} />
       </div>
-    </button>
+    </div>
   );
 };
 

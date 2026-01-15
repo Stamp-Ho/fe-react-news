@@ -1,20 +1,13 @@
+import { useStore } from "../../libs/hooks/useStore";
 import { ListViewIcon, GridViewIcon } from "../common/Icons";
-import { useContext } from "react";
 
 type mainHeaderParams = {
-  viewOnlySubs: boolean;
-  viewGrid: boolean;
   subscribedNum: number;
-  setViewOnlySubs: (bool: boolean) => void;
-  setViewGrid: (bool: boolean) => void;
 };
-const MainHeader = ({
-  viewOnlySubs = false,
-  viewGrid = false,
-  subscribedNum = 0,
-  setViewOnlySubs = (bool: boolean) => {},
-  setViewGrid = (bool: boolean) => {},
-}: mainHeaderParams) => {
+const MainHeader = ({ subscribedNum = 0 }: mainHeaderParams) => {
+  const [viewOnlySubs, setViewOnlySubs] = useStore<boolean>("viewOnlySubs");
+  const [viewGrid, setViewGrid] = useStore<boolean>("viewGrid");
+
   const selectedTab = (bool: boolean) => {
     return bool
       ? "selected-bold16 text-text-strong"

@@ -4,65 +4,213 @@ import {
   fetchPressLogo,
   fetchDashboardData,
 } from "../../mockServer/mockServer";
+import { pressLogoType } from "../../type/types";
 
+export interface ApiResponse<T> {
+  ok: boolean;
+  status: number;
+  message: string;
+  data: T | null;
+}
 /**
- * 헤드라인 롤링 뉴스 가져오기
+ * 롤링 뉴스 가져오기
  */
-export const getRollingNews = async () => {
+export const getRollingNews = async (): Promise<ApiResponse<any[]>> => {
   try {
     const data = await fetchRollingNews();
-    // 필요 시 추가적인 비즈니스 로직 처리 (예: 데이터 유효성 검사)
-    return data;
+    return {
+      ok: true,
+      status: 200,
+      message: "헤드라인 뉴스를 성공적으로 불러왔습니다.",
+      data: data,
+    };
   } catch (error) {
-    console.error("헤드라인 뉴스를 불러오는 데 실패했습니다.");
-    return []; // 에러 시 빈 배열 반환으로 서비스 중단 방지
+    return {
+      ok: false,
+      status: 500,
+      message: "헤드라인 뉴스를 불러오는 데 실패했습니다.",
+      data: [],
+    };
   }
 };
 
 /**
- * 그리드 뷰용 언론사 로고 목록 가져오기
- * 전체 언론사 로고를 가져와서 랜덤하게 섞어서 보여줌
+ * 언론사 로고 목록 가져오기
  */
-export const getPressLogos = async () => {
+export const getPressLogos = async (): Promise<
+  ApiResponse<pressLogoType[]>
+> => {
   try {
     const logos = await fetchPressLogo();
-    // 전체 언론사를 그리드에 뿌려주기 위해 그대로 반환
-    return logos;
+    return {
+      ok: true,
+      status: 200,
+      message: "전체 언론사 로고를 성공적으로 조회했습니다.",
+      data: logos,
+    };
   } catch (error) {
-    console.error("언론사 목록을 불러오는 데 실패했습니다.");
-    throw error;
+    return {
+      ok: false,
+      status: 500,
+      message: "언론사 목록을 불러오는 중 서버 오류가 발생했습니다.",
+      data: null,
+    };
   }
 };
 
 /**
- * 리스트 뷰용 상세 대시보드 데이터 가져오기
- * 특정 언론사의 ID를 받아 상세 기사(메인 + 관련 기사)를 가져옴
+ * 특정 언론사 상세 대시보드 데이터 가져오기
  */
-export const getPressDashboard = async (pressId: number) => {
+export const getPressDashboard = async (
+  pressId: number
+): Promise<ApiResponse<any>> => {
   try {
     const dashboardData = await fetchDashboardData(pressId);
+
     if (!dashboardData) {
-      throw new Error("해당 언론사의 상세 데이터가 없습니다.");
+      return {
+        ok: false,
+        status: 404,
+        message: `ID ${pressId}번에 해당하는 언론사 데이터를 찾을 수 없습니다.`,
+        data: null,
+      };
     }
-    return dashboardData;
+
+    return {
+      ok: true,
+      status: 200,
+      message: "언론사 상세 데이터를 성공적으로 조회했습니다.",
+      data: dashboardData,
+    };
   } catch (error) {
-    console.error(
-      `ID ${pressId}번 언론사 데이터를 가져오는 중 오류 발생:`,
-      error
-    );
-    return null;
+    return {
+      ok: false,
+      status: 500,
+      message: "데이터 로딩 중 예상치 못한 오류가 발생했습니다.",
+      data: null,
+    };
   }
 };
 
 /**
- * [유틸리티] 특정 카테고리별 언론사 필터링
- * API에서 전체를 가져온 뒤, 클라이언트 사이드에서 카테고리별로 분류
+ * 카테고리별 언론사 필터링
  */
-export const getPressLogosByCategory = async (category: string) => {
+export const getPressLogosByCategory = async (): Promise<
+  ApiResponse<any[]>
+> => {
   try {
     const allLogos = await fetchPressLogo();
-    return allLogos.filter((item) => item.category === category);
+    const categoryData: any[] = [];
+
+    allLogos.forEach((item) => {
+      // 1. 현재 아이템의 카테고리가 이미 categoryData에 있는지 확인
+      let categoryGroup = categoryData.find(
+        (group) => group.category === item.category
+      );
+
+      // 2. 없으면 새로운 객체를 생성하고 categoryData에 추가
+      if (!categoryGroup) {
+        categoryGroup = {
+          category: item.category,
+          pressList: [],
+        };
+        categoryData.push(categoryGroup);
+      }
+
+      // 3. 해당 카테고리의 pressList에 현재 언론사 정보를 추가
+      categoryGroup.pressList.push({
+        id: item.id,
+        press: item.press,
+        logo: item.logo,
+      });
+    });
+
+    return {
+      ok: true,
+      status: 200,
+      message: `카테고리 데이터를 조회했습니다.`,
+      data: categoryData,
+    };
   } catch (error) {
-    return [];
+    return {
+      ok: false,
+      status: 500,
+      message: "카테고리 필터링 중 오류가 발생했습니다.",
+      data: [],
+    };
+  }
+};
+
+const SUBSCRIBED_KEY = "subscribed_press_ids";
+
+/**
+ * [GET] 로컬스토리지에서 구독한 언론사 ID 목록 가져오기
+ */
+export const getSubscribedPressList = async () => {
+  try {
+    const storedData = localStorage.getItem(SUBSCRIBED_KEY);
+    const subscribedIds: number[] = storedData ? JSON.parse(storedData) : [];
+
+    return {
+      ok: true,
+      status: 200,
+      message: `구독한 언론사 목록 데이터를 조회했습니다.`,
+      data: subscribedIds,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      status: 500,
+      message: "구독한 언론사 목록 조회 중 오류가 발생했습니다.",
+      data: [],
+    };
+  }
+};
+
+/**
+ * [POST/PATCH] 구독 상태 토글 (추가/해제)
+ * @param pressId - 언론사 고유 ID
+ */
+export const toggleSubscribe = async (pressId: number) => {
+  if (pressId === null)
+    return {
+      ok: false,
+      status: 404,
+      message: "대상 언론사를 찾을 수 없습니다.",
+      data: [],
+    };
+  try {
+    const storedData = localStorage.getItem(SUBSCRIBED_KEY);
+    let newListIds: number[] = storedData ? JSON.parse(storedData) : [];
+
+    const isSubscribed = newListIds.includes(pressId);
+    let message = "";
+
+    if (isSubscribed) {
+      // 이미 구독 중이면 해제
+      newListIds = newListIds.filter((id) => id !== pressId);
+      message = "구독이 해제되었습니다.";
+    } else {
+      // 구독 중이 아니면 추가
+      newListIds.push(pressId);
+      message = "구독 목록에 추가되었습니다.";
+    }
+
+    localStorage.setItem(SUBSCRIBED_KEY, JSON.stringify(newListIds));
+
+    // 성공 응답 반환
+    return {
+      ok: true,
+      status: 200,
+      message: message,
+      data: newListIds,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      status: 500,
+      message: "언론사 구독 처리 중 오류가 발생했습니다.",
+      data: [],
+    };
   }
 };

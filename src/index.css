@@ -185,6 +185,12 @@
     line-height: normal;
   }
 
+  .available-medium12 {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    @apply cursor-pointer;
+  }
   .available-medium14 {
     font-size: 14px;
     font-weight: 500;

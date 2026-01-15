@@ -21,7 +21,7 @@ export default function RollingSection({
   useEffect(() => {
     const getData = async () => {
       const data = await getRollingNews();
-      setNewsData(data);
+      setNewsData(data.data);
     };
     getData();
   }, []);
