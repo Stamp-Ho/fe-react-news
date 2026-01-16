@@ -40,7 +40,9 @@ export function SubscribeBtn({
     <button
       className={`cursor-pointer border border-border-default h-6 flex-row flex items-center rounded-full
         available-medium12 text-text-weak hover:text-text-bold gap-0.5 px-1.5
-        hover:border-border-bold  ${bgColorByParentBg}`}
+        hover:border-border-bold  ${bgColorByParentBg} ${
+        onWhiteBg && "items-center justify-center w-6"
+      }`}
       onClick={onSubscribeClicked}
     >
       <div>
@@ -50,7 +52,9 @@ export function SubscribeBtn({
           <PlusIcon className="w-4 h-4" />
         )}
       </div>
-      <div className="pr-1 ">{isSubscribed ? "구독해제" : "구독하기"}</div>
+      {onWhiteBg || (
+        <div className="pr-1 ">{isSubscribed ? "구독해제" : "구독하기"}</div>
+      )}
     </button>
   );
 }

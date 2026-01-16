@@ -10,3 +10,21 @@ export type unsubscribeTarget = {
   name: string;
   isSubscribed: boolean;
 };
+
+export type articleType = {
+  title: string;
+  link: string;
+};
+
+export type pressDashboardDataType = {
+  category: string;
+  currentPage: string;
+  totalPage: string;
+  logo: string;
+  press: string;
+  time: string;
+  mainTitle: string;
+  mainLink: string;
+  mainImg: string;
+  relatedArticles: articleType[];
+};

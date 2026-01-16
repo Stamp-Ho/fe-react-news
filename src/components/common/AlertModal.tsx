@@ -30,7 +30,7 @@ const AlertModal = () => {
         >
           <strong className="text-text-strong">{data.name}</strong>을(를)
         </div>
-        <div>구독{data.isSubscribed ? "해지" : ""} 하시겠습까?</div>
+        <div>구독{data.isSubscribed ? "해지" : ""}하시겠습까?</div>
       </div>
       <div className="flex flex-row">
         <button
@@ -44,7 +44,7 @@ const AlertModal = () => {
          hover:underline
          cursor-pointer"
         >
-          예, {data.isSubscribed ? "해지" : "구독"} 합니다.
+          예, {data.isSubscribed ? "해지" : "구독"}합니다.
         </button>
         <button
           onClick={onNo}

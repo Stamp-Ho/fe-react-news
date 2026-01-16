@@ -35,7 +35,7 @@ export const apiClient = async (url: string, options?: RequestInit) => {
       response = await getPressLogos();
       break;
     case "pressDashboard":
-      response = await getPressDashboard(param);
+      response = await getPressDashboard(param - 1);
       break;
     case "rollingNews":
       response = await getRollingNews();

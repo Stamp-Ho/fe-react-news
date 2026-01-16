@@ -31,7 +31,7 @@ export const fetchDashboardData = async (id: number) => {
   try {
     const data = pressDashboardData;
 
-    const result = data.find((d) => d.id === id);
+    const result = data.find((d, index) => index === id);
     return result;
   } catch (error) {
     console.error(error);
